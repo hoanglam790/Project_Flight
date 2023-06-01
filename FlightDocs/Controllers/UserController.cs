@@ -24,5 +24,31 @@ namespace FlightDocs.Controllers
             await _userRepo.CreateUser(user);
             return Ok("New user has been created successfully.");
         }
+
+        //Login
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> Login([FromBody] UserLogin user)
+        {
+            var userLogin = await _userRepo.LoginUser(user);
+            if(userLogin == null)
+            {
+                return BadRequest("Login failed.");
+            }
+            return Ok(userLogin);
+        }
+
+        //Verify user
+        [HttpPost]
+        [Route("Verify")]
+        public async Task<IActionResult> VerifyUser(string token)
+        {
+            var verifyUser = await _userRepo.VerifyUser(token);
+            if(verifyUser == null)
+            {
+                return BadRequest("Invalid token.");
+            }
+            return Ok(verifyUser);
+        }
     }
 }

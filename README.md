@@ -10,3 +10,8 @@
 
 - Tạo repository cho User
 - Đăng ký user (chưa ràng buộc được địa chỉ email có dạng: @alta.com.vn)
+
+3. 29/05/2023 - 01/06/2023
+
+- Viết API xác thực User sau khi đăng ký thành công (thông qua token)
+- Viết API Login (đang gặp lỗi khi đăng nhập)

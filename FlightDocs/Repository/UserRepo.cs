@@ -36,6 +36,58 @@ namespace FlightDocs.Repository
             return r;
         }
 
+        public async Task<object> LoginUser(UserLogin user)
+        {
+            var userResult = new UserLoginResult();
+            var userLogin = FindUser(user.Email);
+            if(userLogin == null)
+            {
+                userResult.Success = false;
+                userResult.MessageResponse = "Invalid email.";
+                return userResult;
+            }
+            else
+            {
+                User account = new User();
+                var verifyUser = VerifyPasswordHashing(user.Password, account.PasswordHashing, account.PasswordSalt);
+                if(!verifyUser)
+                {
+                    userResult.Success = false;
+                    userResult.MessageResponse = "Password is invalid. Please check again !!!";
+                    return userResult;
+                }
+                if(account.VeryfiedAt == null)
+                {
+                    userResult.Success = false;
+                    userResult.MessageResponse = "Unauthenticated user.";
+                    return userResult;
+                }
+                else
+                {
+                    userResult.Success = true;
+                    userResult.MessageResponse = $"Login succesful. Your name: {account.Name}";
+                    return userResult;
+                }
+            }
+        }
+
+        public async Task<object> VerifyUser(string token)
+        {
+            var userResult = new UserLoginResult();
+            var verify = _dataContext.Users.FirstOrDefault(n => n.VerifyToken == token);
+            if (verify == null)
+            {
+                userResult.Success = false;
+                userResult.MessageResponse = "Invalid token";
+                return userResult;
+            }
+            verify.VeryfiedAt = DateTime.Now;
+            _dataContext.SaveChanges();
+            userResult.Success = true;
+            userResult.MessageResponse = "User has been verified successful.";
+            return userResult;
+        }
+
         private void CreatePasswordHashing(string passWord, out byte[] passHash, out byte[] passSalt)
         {
             using (var ph = new HMACSHA512())
@@ -62,6 +114,40 @@ namespace FlightDocs.Repository
                 .Select(s => s[random.Next(s.Length)]).ToArray());
 
         }
+
+        public object FindUser(string email)
+        {
+            var userResult = new UserLoginResult();
+            var userLogin = _dataContext.Users.FirstOrDefault(n => n.Email == email);
+            if (userLogin == null)
+            {
+                userResult.Success = false;
+                userResult.MessageResponse = "User is not found.";
+                return userResult;
+            }
+            else
+            {
+                userResult.Success = true;
+                userResult.MessageResponse = "User was found.";
+                return userResult;
+            }           
+        }
+
+        //public object VerifyUser(string token)
+        //{
+        //    var userResult = new UserLoginResult();
+        //    var verify = _dataContext.Users.FirstOrDefault(n => n.VerifyToken == token);
+        //    if(verify == null)
+        //    {
+        //        userResult.Success = false;
+        //        userResult.MessageResponse = "Invalid token";
+        //        return userResult;
+        //    }
+        //    verify.VeryfiedAt = DateTime.Now;
+        //    _dataContext.SaveChanges();
+        //    userResult.MessageResponse = "User has been verified successful.";
+        //    return userResult;
+        //}
 
         //Save data into database
         public bool SaveData(User user)
