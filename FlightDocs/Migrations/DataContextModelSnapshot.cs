@@ -67,9 +67,6 @@ namespace FlightDocs.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Permission")
-                        .HasColumnType("int");
-
                     b.Property<string>("TyleName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

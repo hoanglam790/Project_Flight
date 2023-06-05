@@ -15,3 +15,7 @@
 
 - Viết API xác thực User sau khi đăng ký thành công (thông qua token)
 - Viết API Login (đang gặp lỗi khi đăng nhập)
+
+4. 02/06/2023 - 05/06/2023
+
+- Viết API Document Type (CRUD, đang gặp lỗi khi không lấy được dữ liệu lên Swagger)

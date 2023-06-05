@@ -8,6 +8,5 @@ namespace FlightDocs.Models
         public int TypeID { get; set; }
         public string TyleName { get; set; } = string.Empty;
         public DateTime CreateDate { get; set; }
-        public int Permission { get; set; }
     }
 }
