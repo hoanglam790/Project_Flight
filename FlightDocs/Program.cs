@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<IDocTypesRepo, DocTypesRepo>();
+builder.Services.AddScoped<IFlightRepo, FlightRepo>();
 
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(CustomProfile).Assembly);
