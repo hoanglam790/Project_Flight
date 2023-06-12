@@ -1,4 +1,5 @@
-﻿using FlightDocs.DTO;
+﻿using AutoMapper;
+using FlightDocs.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,8 +27,15 @@ namespace FlightDocs.Controllers
         [Route("{id}")]
         public async Task<IActionResult> GetAllDocumentTypesByID(int id)
         {
-            var getAll = await _documentTypes.GetDocumentTypeById(id);
-            return Ok(getAll);
+            var getDocumentTypeID = await _documentTypes.GetDocumentTypeById(id);
+            if(getDocumentTypeID != null)
+            {
+                return Ok(getDocumentTypeID);
+            }
+            else
+            {
+                return BadRequest("Not found document type id.");
+            }
         }
 
         [HttpPost]
@@ -35,6 +43,38 @@ namespace FlightDocs.Controllers
         {
             await _documentTypes.CreateDocumentType(newDocumentType);
             return Ok("New document type has been created successfully.");
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateDocumentTypes(DocumentTypeRead documentTypeRead, int id)
+        {
+            var updateDocumentTypeID = await _documentTypes.GetDocumentTypeById(id);
+            if(updateDocumentTypeID != null)
+            {
+                await _documentTypes.UpdateDocumentType(documentTypeRead, id);
+                return Ok("Document type has been updated successfully.");
+            }
+            else
+            {
+                return BadRequest("Update fail. Not found document type id.");
+            }
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteDocumentTypes(int id)
+        {
+            var updateDocumentTypeID = await _documentTypes.GetDocumentTypeById(id);
+            if (updateDocumentTypeID != null)
+            {
+                await _documentTypes.DeleteDocumentType(id);
+                return Ok("Document type has been deleted successfully.");
+            }
+            else
+            {
+                return BadRequest("Delete fail. Not found document type id.");
+            }
         }
     }
 }

@@ -18,4 +18,12 @@
 
 4. 02/06/2023 - 05/06/2023
 
-- Viết API Document Type (CRUD, đang gặp lỗi khi không lấy được dữ liệu lên Swagger)
+- Viết API Document Type (CRUD)
+
+5. 06/06/2023 - 08/06/2023
+
+- Viết API Flight (CRUD, chưa lấy được dữ liệu, sửa, xóa)
+
+6. 09/06/2023 - 12/06/2023
+
+- Hoàn thiện API Flight

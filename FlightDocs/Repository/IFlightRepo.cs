@@ -6,8 +6,8 @@ namespace FlightDocs.Repository
     {
         Task<List<FlightRead>> GetAllFlight();
         Task<FlightRead> GetFlightById(string id);
-        Task<object> CreateFlight(FlightCreate flightCreate);
-        Task UpdateFlight(FlightRead flight, string id);
-        Task DeleteFlight(string id);
+        Task<bool> CreateFlight(FlightCreate flightCreate);
+        Task<bool> UpdateFlight(FlightRead flight, string id);
+        Task<bool> DeleteFlight(string id);
     }
 }

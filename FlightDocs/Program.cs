@@ -1,6 +1,5 @@
 global using Microsoft.EntityFrameworkCore;
-global using FlightDocs.Models;
-global using FlightDocs.Data;
+global using FlightDocs.Model;
 global using FlightDocs.Repository;
 global using FlightDocs.Profiles;
 
@@ -11,15 +10,16 @@ builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<IDocTypesRepo, DocTypesRepo>();
 builder.Services.AddScoped<IFlightRepo, FlightRepo>();
 
-builder.Services.AddControllers();
-builder.Services.AddAutoMapper(typeof(CustomProfile).Assembly);
+builder.Services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Configure database
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException();
-builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<FlightDocsContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 

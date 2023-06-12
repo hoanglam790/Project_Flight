@@ -1,4 +1,5 @@
 ﻿using FlightDocs.DTO;
+using FlightDocs.Model;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -10,9 +11,9 @@ namespace FlightDocs.Repository
     public class UserRepo : IUserRepo
     {
         private readonly IConfiguration? _configuration;
-        private readonly DataContext _dataContext;
+        private readonly FlightDocsContext _dataContext;
 
-        public UserRepo(IConfiguration configuration, DataContext dataContext)
+        public UserRepo(IConfiguration configuration, FlightDocsContext dataContext)
         {
             _configuration = configuration;
             _dataContext = dataContext;

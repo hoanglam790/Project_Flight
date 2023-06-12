@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
+using FlightDocs.Model;
 using FlightDocs.DTO;
-using FlightDocs.Results;
 
 namespace FlightDocs.Repository
 {
     public class FlightRepo : IFlightRepo
     {
-        private readonly DataContext _dataContext;
+        private readonly FlightDocsContext _dataContext;
         private readonly IMapper _mapper;
 
-        public FlightRepo(DataContext dataContext, IMapper mapper)
+        public FlightRepo(FlightDocsContext dataContext, IMapper mapper)
         {
             _dataContext = dataContext;
             _mapper = mapper;
@@ -27,46 +27,49 @@ namespace FlightDocs.Repository
             return _mapper.Map<FlightRead>(listFlightByID);
         }
 
-        public async Task<object> CreateFlight(FlightCreate flightCreate)
+        public async Task<bool> CreateFlight(FlightCreate flightCreate)
         {
-            var r = new Result();
             var addFlight = new Flight();
-            addFlight.FlightID = flightCreate.FlightID;
+            addFlight.FlightId = flightCreate.FlightID;
             addFlight.FlightFrom = flightCreate.FlightFrom;
             addFlight.FlightTo = flightCreate.FlightTo;
             addFlight.DepartureDate = flightCreate.DepartureDate;
-            r.Success = SaveData(addFlight);
-            return r;
+            _dataContext.Add(addFlight);
+            await _dataContext.SaveChangesAsync();
+            return true;
         }
 
-        public async Task UpdateFlight(FlightRead flight, string id)
+        public async Task<bool> UpdateFlight(FlightRead flight, string id)
         {
-            if(flight.FlightID == id)
+            var updateFlight = await _dataContext.Flights.FirstOrDefaultAsync(f => f.FlightId == id);
+            if (updateFlight != null)
             {
-                var updateFlight = new Flight();
                 updateFlight.FlightFrom = flight.FlightFrom;
                 updateFlight.FlightTo = flight.FlightTo;
                 updateFlight.DepartureDate = flight.DepartureDate;
                 _dataContext.Update(updateFlight);
                 await _dataContext.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
-        public async Task DeleteFlight(string id)
+        public async Task<bool> DeleteFlight(string id)
         {
-            var deleteFlight = await _dataContext.Flights.FirstOrDefaultAsync(n => n.FlightID == id);
+            var deleteFlight = await _dataContext.Flights.FirstOrDefaultAsync(n => n.FlightId == id);
             if(deleteFlight != null)
             {
                 _dataContext.Remove(deleteFlight);
                 await _dataContext.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
-
-        public bool SaveData(Flight flight)
-        {
-            _dataContext.Add(flight);
-            _dataContext.SaveChanges();
-            return true;
-        }     
     }
 }

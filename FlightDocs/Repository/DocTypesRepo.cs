@@ -1,15 +1,17 @@
 ﻿using AutoMapper;
+using FlightDocs.Model;
 using FlightDocs.DTO;
 using FlightDocs.Results;
+using DocumentType = FlightDocs.Model.DocumentType;
 
 namespace FlightDocs.Repository
 {
     public class DocTypesRepo : IDocTypesRepo
     {
-        private readonly DataContext _dataContext;
+        private readonly FlightDocsContext _dataContext;
         private readonly IMapper _mapper;
 
-        public DocTypesRepo(DataContext dataContext, IMapper mapper)
+        public DocTypesRepo(FlightDocsContext dataContext, IMapper mapper)
         {
             _dataContext = dataContext;
             _mapper = mapper;
@@ -27,21 +29,46 @@ namespace FlightDocs.Repository
             return _mapper.Map<DocumentTypeRead>(getDocumentTypeByID);
         }
 
-        public async Task<object> CreateDocumentType(DocumentTypeCreate documentTypeCreate)
+        public async Task<bool> CreateDocumentType(DocumentTypeCreate documentTypeCreate)
         {
-            var r = new Result();
             var documentType = new DocumentType();
             documentType.TyleName = documentTypeCreate.DocumentTypeName;
             documentType.CreateDate = DateTime.Now;
-            r.Success = SaveData(documentType);
-            return r;
+            _dataContext.DocumentTypes.Add(documentType);
+            await _dataContext.SaveChangesAsync();
+            return true;
         }
 
-        public bool SaveData(DocumentType documentType)
+        public async Task<bool> UpdateDocumentType(DocumentTypeRead documentTypeRead, int id)
         {
-            _dataContext.Add(documentType);
-            _dataContext.SaveChanges();
-            return true;
+            var updateDocsType = await _dataContext.DocumentTypes.FirstOrDefaultAsync(n => n.TypeId == id);
+            if(updateDocsType != null)
+            {
+                updateDocsType.TyleName = documentTypeRead.DocumentTypeName;
+                updateDocsType.CreateDate = DateTime.Now;
+                _dataContext.Update(updateDocsType);
+                await _dataContext.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteDocumentType(int id)
+        {
+            var deleteDocsType = await _dataContext.DocumentTypes.FirstOrDefaultAsync(n => n.TypeId == id);
+            if(deleteDocsType != null)
+            {
+                _dataContext.Remove(deleteDocsType);
+                await _dataContext.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

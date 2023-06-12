@@ -8,6 +8,7 @@ namespace FlightDocs.Profiles
         public CustomProfile()
         {
             CreateMap<DocumentType, DocumentTypeRead>();
+            CreateMap<Flight, FlightRead>();
         }
     }
 }

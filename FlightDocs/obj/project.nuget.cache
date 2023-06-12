@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "B2xQ2xv1R/mqoMesD3viYlkzTf//dJelMEY9Dj/GZ6KrVKh6c0oeT/UFFLh9F4sGvNlZ8qxWbA5gBrmUyMyBMQ==",
+  "dgSpecHash": "k3DUs+CZyP7oLTEqxYBopnyxqYYPWf8JTRFIBMEfe+6Kv2MdDtWAKVd7MfMbzQmtw+yvu3s8jrSbdyu9NW7qEw==",
   "success": true,
   "projectFilePath": "E:\\Source\\FlightDocs\\FlightDocs\\FlightDocs.csproj",
   "expectedPackageFiles": [
@@ -19,6 +19,7 @@
     "C:\\Users\\ASUS vivobook\\.nuget\\packages\\microsoft.entityframeworkcore.design\\7.0.5\\microsoft.entityframeworkcore.design.7.0.5.nupkg.sha512",
     "C:\\Users\\ASUS vivobook\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.5\\microsoft.entityframeworkcore.relational.7.0.5.nupkg.sha512",
     "C:\\Users\\ASUS vivobook\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\7.0.5\\microsoft.entityframeworkcore.sqlserver.7.0.5.nupkg.sha512",
+    "C:\\Users\\ASUS vivobook\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\7.0.5\\microsoft.entityframeworkcore.tools.7.0.5.nupkg.sha512",
     "C:\\Users\\ASUS vivobook\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\ASUS vivobook\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\ASUS vivobook\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",

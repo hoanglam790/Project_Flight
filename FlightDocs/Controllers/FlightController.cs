@@ -1,4 +1,6 @@
-﻿using FlightDocs.DTO;
+﻿using AutoMapper;
+using FlightDocs.DTO;
+using FlightDocs.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,7 +29,14 @@ namespace FlightDocs.Controllers
         public async Task<IActionResult> GetFlightById(string id)
         {
             var getFlightByID = await _flightRepo.GetFlightById(id);
-            return Ok(getFlightByID);
+            if(getFlightByID != null)
+            {
+                return Ok(getFlightByID);
+            }
+            else
+            {
+                return BadRequest("Not found flight id.");
+            }
         }
 
         [HttpPost]
@@ -38,16 +47,18 @@ namespace FlightDocs.Controllers
         }
 
         [HttpPut]
+        [Route("{id}")]
         public async Task<IActionResult> UpdateFlight(FlightRead flight, string id)
         {
-            if(flight.FlightID != id)
+            var getFlightID = await _flightRepo.GetFlightById(id);
+            if(getFlightID != null)
             {
-                return BadRequest("Not found flight id");
+                await _flightRepo.UpdateFlight(flight, id);
+                return Ok("Flight has been updated successfully.");               
             }
             else
             {
-                await _flightRepo.UpdateFlight(flight, id);
-                return Ok("Flight has been updated successfully.");
+                return BadRequest("Update fail. Not found flight id.");
             }
         }
 
@@ -56,14 +67,14 @@ namespace FlightDocs.Controllers
         public async Task<IActionResult> DeleteFlight(string id)
         {
             var getFlightID = await _flightRepo.GetFlightById(id);
-            if(getFlightID == null)
+            if(getFlightID != null)
             {
-                return BadRequest("Flight id is not exist.");
+                await _flightRepo.DeleteFlight(id);
+                return Ok("Flight has been deleted successfully.");                
             }
             else
             {
-                await _flightRepo.DeleteFlight(id);
-                return Ok("Flight has been deleted successfully.");
+                return BadRequest("Delete fail. Flight id is not exist.");
             }
         }
     }
