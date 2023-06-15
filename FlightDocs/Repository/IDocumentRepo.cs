@@ -7,6 +7,6 @@ namespace FlightDocs.Repository
         Task<List<DocumentRead>> GetAllDocument();
         Task<DocumentRead> GetDocumentById(int id);
         Task<bool> CreateDocumentType(DocumentCreate documentCreate);
-        Task<bool> UpdateDocumentType(DocumentRead documentRead, int id);
+        Task<bool> UpdateDocumentType(DocumentCreate document, int id);
     }
 }

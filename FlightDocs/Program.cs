@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<IDocTypesRepo, DocTypesRepo>();
 builder.Services.AddScoped<IFlightRepo, FlightRepo>();
+builder.Services.AddScoped<IDocumentRepo, DocumentRepo>();
 
 builder.Services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

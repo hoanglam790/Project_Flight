@@ -27,3 +27,7 @@
 6. 09/06/2023 - 12/06/2023
 
 - Hoàn thiện API Flight
+
+7. 13/06/2023 - 15/06/2023
+
+- Viết API Document (CRUD, chưa upload được file)
