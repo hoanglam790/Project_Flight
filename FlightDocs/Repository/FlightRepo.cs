@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
-using FlightDocs.Model;
 using FlightDocs.DTO;
+using FlightDocs.Results;
 
 namespace FlightDocs.Repository
 {
     public class FlightRepo : IFlightRepo
     {
-        private readonly FlightDocsContext _dataContext;
+        private readonly DataContext _dataContext;
         private readonly IMapper _mapper;
 
-        public FlightRepo(FlightDocsContext dataContext, IMapper mapper)
+        public FlightRepo(DataContext dataContext, IMapper mapper)
         {
             _dataContext = dataContext;
             _mapper = mapper;
@@ -30,7 +30,7 @@ namespace FlightDocs.Repository
         public async Task<bool> CreateFlight(FlightCreate flightCreate)
         {
             var addFlight = new Flight();
-            addFlight.FlightId = flightCreate.FlightID;
+            addFlight.FlightID = flightCreate.FlightID;
             addFlight.FlightFrom = flightCreate.FlightFrom;
             addFlight.FlightTo = flightCreate.FlightTo;
             addFlight.DepartureDate = flightCreate.DepartureDate;
@@ -41,7 +41,7 @@ namespace FlightDocs.Repository
 
         public async Task<bool> UpdateFlight(FlightRead flight, string id)
         {
-            var updateFlight = await _dataContext.Flights.FirstOrDefaultAsync(f => f.FlightId == id);
+            var updateFlight = await _dataContext.Flights.FirstOrDefaultAsync(f => f.FlightID == id);
             if (updateFlight != null)
             {
                 updateFlight.FlightFrom = flight.FlightFrom;
@@ -59,8 +59,8 @@ namespace FlightDocs.Repository
 
         public async Task<bool> DeleteFlight(string id)
         {
-            var deleteFlight = await _dataContext.Flights.FirstOrDefaultAsync(n => n.FlightId == id);
-            if(deleteFlight != null)
+            var deleteFlight = await _dataContext.Flights.FirstOrDefaultAsync(n => n.FlightID == id);
+            if (deleteFlight != null)
             {
                 _dataContext.Remove(deleteFlight);
                 await _dataContext.SaveChangesAsync();

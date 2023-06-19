@@ -1,17 +1,15 @@
 ﻿using AutoMapper;
-using FlightDocs.Model;
 using FlightDocs.DTO;
 using FlightDocs.Results;
-using DocumentType = FlightDocs.Model.DocumentType;
 
 namespace FlightDocs.Repository
 {
     public class DocTypesRepo : IDocTypesRepo
     {
-        private readonly FlightDocsContext _dataContext;
+        private readonly DataContext _dataContext;
         private readonly IMapper _mapper;
 
-        public DocTypesRepo(FlightDocsContext dataContext, IMapper mapper)
+        public DocTypesRepo(DataContext dataContext, IMapper mapper)
         {
             _dataContext = dataContext;
             _mapper = mapper;
@@ -41,8 +39,8 @@ namespace FlightDocs.Repository
 
         public async Task<bool> UpdateDocumentType(DocumentTypeRead documentTypeRead, int id)
         {
-            var updateDocsType = await _dataContext.DocumentTypes.FirstOrDefaultAsync(n => n.TypeId == id);
-            if(updateDocsType != null)
+            var updateDocsType = await _dataContext.DocumentTypes.FirstOrDefaultAsync(n => n.TypeID == id);
+            if (updateDocsType != null)
             {
                 updateDocsType.TyleName = documentTypeRead.DocumentTypeName;
                 updateDocsType.CreateDate = DateTime.Now;
@@ -58,8 +56,8 @@ namespace FlightDocs.Repository
 
         public async Task<bool> DeleteDocumentType(int id)
         {
-            var deleteDocsType = await _dataContext.DocumentTypes.FirstOrDefaultAsync(n => n.TypeId == id);
-            if(deleteDocsType != null)
+            var deleteDocsType = await _dataContext.DocumentTypes.FirstOrDefaultAsync(n => n.TypeID == id);
+            if (deleteDocsType != null)
             {
                 _dataContext.Remove(deleteDocsType);
                 await _dataContext.SaveChangesAsync();

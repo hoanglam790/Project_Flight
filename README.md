@@ -31,3 +31,8 @@
 7. 13/06/2023 - 15/06/2023
 
 - Viết API Document (CRUD, chưa upload được file)
+
+8. 16/06/2023 - 19/06/2023
+
+- Viết API Role (CRUD)
+- Viết API Permission (CRUD)

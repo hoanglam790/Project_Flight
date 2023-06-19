@@ -6,7 +6,8 @@ namespace FlightDocs.Models
     {
         [Key]
         public int TypeID { get; set; }
-        public string TyleName { get; set; } = string.Empty;
+        public string? TyleName { get; set; }
         public DateTime CreateDate { get; set; }
+        public virtual ICollection<Document> Documents { get; set; } = new List<Document>();
     }
 }

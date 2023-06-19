@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using FlightDocs.DTO;
-using FlightDocs.Results;
+﻿using FlightDocs.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,7 +27,7 @@ namespace FlightDocs.Controllers
         public async Task<IActionResult> GetFlightById(string id)
         {
             var getFlightByID = await _flightRepo.GetFlightById(id);
-            if(getFlightByID != null)
+            if (getFlightByID != null)
             {
                 return Ok(getFlightByID);
             }
@@ -51,10 +49,10 @@ namespace FlightDocs.Controllers
         public async Task<IActionResult> UpdateFlight(FlightRead flight, string id)
         {
             var getFlightID = await _flightRepo.GetFlightById(id);
-            if(getFlightID != null)
+            if (getFlightID != null)
             {
                 await _flightRepo.UpdateFlight(flight, id);
-                return Ok("Flight has been updated successfully.");               
+                return Ok("Flight has been updated successfully.");
             }
             else
             {
@@ -67,10 +65,10 @@ namespace FlightDocs.Controllers
         public async Task<IActionResult> DeleteFlight(string id)
         {
             var getFlightID = await _flightRepo.GetFlightById(id);
-            if(getFlightID != null)
+            if (getFlightID != null)
             {
                 await _flightRepo.DeleteFlight(id);
-                return Ok("Flight has been deleted successfully.");                
+                return Ok("Flight has been deleted successfully.");
             }
             else
             {

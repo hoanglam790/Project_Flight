@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using FlightDocs.DTO;
+﻿using FlightDocs.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,7 +27,7 @@ namespace FlightDocs.Controllers
         public async Task<IActionResult> GetAllDocumentTypesByID(int id)
         {
             var getDocumentTypeID = await _documentTypes.GetDocumentTypeById(id);
-            if(getDocumentTypeID != null)
+            if (getDocumentTypeID != null)
             {
                 return Ok(getDocumentTypeID);
             }
@@ -50,7 +49,7 @@ namespace FlightDocs.Controllers
         public async Task<IActionResult> UpdateDocumentTypes(DocumentTypeRead documentTypeRead, int id)
         {
             var updateDocumentTypeID = await _documentTypes.GetDocumentTypeById(id);
-            if(updateDocumentTypeID != null)
+            if (updateDocumentTypeID != null)
             {
                 await _documentTypes.UpdateDocumentType(documentTypeRead, id);
                 return Ok("Document type has been updated successfully.");

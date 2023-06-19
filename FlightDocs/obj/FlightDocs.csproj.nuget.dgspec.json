@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Source\\FlightDocs\\FlightDocs\\FlightDocs.csproj": {}
+    "E:\\Coding Documents\\Project_Flight-main\\FlightDocs\\FlightDocs.csproj": {}
   },
   "projects": {
-    "E:\\Source\\FlightDocs\\FlightDocs\\FlightDocs.csproj": {
+    "E:\\Coding Documents\\Project_Flight-main\\FlightDocs\\FlightDocs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Source\\FlightDocs\\FlightDocs\\FlightDocs.csproj",
+        "projectUniqueName": "E:\\Coding Documents\\Project_Flight-main\\FlightDocs\\FlightDocs.csproj",
         "projectName": "FlightDocs",
-        "projectPath": "E:\\Source\\FlightDocs\\FlightDocs\\FlightDocs.csproj",
+        "projectPath": "E:\\Coding Documents\\Project_Flight-main\\FlightDocs\\FlightDocs.csproj",
         "packagesPath": "C:\\Users\\ASUS vivobook\\.nuget\\packages\\",
-        "outputPath": "E:\\Source\\FlightDocs\\FlightDocs\\obj\\",
+        "outputPath": "E:\\Coding Documents\\Project_Flight-main\\FlightDocs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ASUS vivobook\\AppData\\Roaming\\NuGet\\NuGet.Config",
