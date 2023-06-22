@@ -31,6 +31,8 @@ namespace FlightDocs.Repository
             createUser.PasswordSalt = passSalt;
             createUser.Address = user.Address;
             createUser.Phone = user.Phone;
+            createUser.RoleID = user.Role;
+            createUser.GroupID = user.Group;
             createUser.VerifyToken = CreateNewToken();
             r.Success = SaveData(createUser);
             return r;

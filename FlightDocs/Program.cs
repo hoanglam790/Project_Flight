@@ -13,6 +13,7 @@ builder.Services.AddScoped<IDocumentRepo, DocumentRepo>();
 builder.Services.AddScoped<IFlightRepo, FlightRepo>();
 builder.Services.AddScoped<IRoleRepo, RoleRepo>();
 builder.Services.AddScoped<IPermissionRepo, PermissionRepo>();
+builder.Services.AddScoped<IGroupPermissionRepo, GroupPermissionRepo>();
 
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(CustomProfile).Assembly);

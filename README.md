@@ -36,3 +36,8 @@
 
 - Viết API Role (CRUD)
 - Viết API Permission (CRUD)
+
+9. 20/06/2023 - 22/06/2023
+
+- Viết API Group Permission (CRUD)
+- Đang xử lý lỗi trong việc phân quyền, upload tài liệu

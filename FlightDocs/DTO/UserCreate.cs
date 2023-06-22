@@ -20,6 +20,8 @@ namespace FlightDocs.DTO
         public string Address { get; set; } = string.Empty;
         [Required]
         public string Phone { get; set; } = string.Empty;
+        public int Role { get; set; }
+        public int Group { get; set; }
         public string VerifyToken { get; set; } = string.Empty;
     }
 }

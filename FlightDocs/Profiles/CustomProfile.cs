@@ -11,6 +11,7 @@ namespace FlightDocs.Profiles
             CreateMap<Flight, FlightRead>();
             CreateMap<Role, RoleRead>();
             CreateMap<Permission, PermissionRead>();
+            CreateMap<GroupPermission, GroupPermissionRead>();
         }
     }
 }
