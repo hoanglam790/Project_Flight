@@ -38,7 +38,7 @@ namespace FlightDocs.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateNewDocument(DocumentCreate document)
+        public async Task<IActionResult> CreateNewDocument([FromForm] DocumentCreate document)
         {
             await _documentRepo.CreateDocumentType(document);
             return Ok("New document has been created successfully");
@@ -46,7 +46,7 @@ namespace FlightDocs.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> UpdateDocument(DocumentCreate document, int id)
+        public async Task<IActionResult> UpdateDocument([FromForm] DocumentCreate document, int id)
         {
             var getDocumentID = await _documentRepo.GetDocumentById(id);
             if (getDocumentID != null)

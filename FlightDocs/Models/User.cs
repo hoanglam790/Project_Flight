@@ -13,7 +13,7 @@ namespace FlightDocs.Models
         public string? Address { get; set; }
         public string? Phone { get; set; }
         public int? RoleID { get; set; }
-        public int? GroupID { get; set; }
+        public int? GroupPermissionID { get; set; }
         public string? VerifyToken { get; set; }
         public DateTime? VeryfiedAt { get; set; }
         public string? ResetPassword { get; set; }

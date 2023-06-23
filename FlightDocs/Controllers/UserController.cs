@@ -19,7 +19,7 @@ namespace FlightDocs.Controllers
         //Create a new user
         [HttpPost]
         [Route("CreateUser")]
-        public async Task<IActionResult> CreateNewUser([FromBody] UserCreate user)
+        public async Task<IActionResult> CreateNewUser(UserCreate user)
         {
             await _userRepo.CreateUser(user);
             return Ok("New user has been created successfully.");
@@ -28,7 +28,7 @@ namespace FlightDocs.Controllers
         //Login
         [HttpPost]
         [Route("Login")]
-        public async Task<IActionResult> Login([FromBody] UserLogin user)
+        public async Task<IActionResult> Login(UserLogin user)
         {
             var userLogin = await _userRepo.LoginUser(user);
             if(userLogin == null)
@@ -44,7 +44,7 @@ namespace FlightDocs.Controllers
         public async Task<IActionResult> VerifyUser(string token)
         {
             var verifyUser = await _userRepo.VerifyUser(token);
-            if(verifyUser == null)
+            if (verifyUser == null)
             {
                 return BadRequest("Invalid token.");
             }

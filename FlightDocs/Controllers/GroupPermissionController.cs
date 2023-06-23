@@ -1,4 +1,5 @@
 ﻿using FlightDocs.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,6 +39,7 @@ namespace FlightDocs.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateNewGroupPermission(GroupPermissionCreate groupPermission)
         {
             await _groupPermissionRepo.CreateGroupPermission(groupPermission);

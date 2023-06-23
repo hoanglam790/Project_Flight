@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Coding Documents\\Project_Flight-main\\FlightDocs\\FlightDocs.csproj": {}
+    "E:\\Test code\\Project_Flight-main\\FlightDocs\\FlightDocs.csproj": {}
   },
   "projects": {
-    "E:\\Coding Documents\\Project_Flight-main\\FlightDocs\\FlightDocs.csproj": {
+    "E:\\Test code\\Project_Flight-main\\FlightDocs\\FlightDocs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Coding Documents\\Project_Flight-main\\FlightDocs\\FlightDocs.csproj",
+        "projectUniqueName": "E:\\Test code\\Project_Flight-main\\FlightDocs\\FlightDocs.csproj",
         "projectName": "FlightDocs",
-        "projectPath": "E:\\Coding Documents\\Project_Flight-main\\FlightDocs\\FlightDocs.csproj",
+        "projectPath": "E:\\Test code\\Project_Flight-main\\FlightDocs\\FlightDocs.csproj",
         "packagesPath": "C:\\Users\\ASUS vivobook\\.nuget\\packages\\",
-        "outputPath": "E:\\Coding Documents\\Project_Flight-main\\FlightDocs\\obj\\",
+        "outputPath": "E:\\Test code\\Project_Flight-main\\FlightDocs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ASUS vivobook\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -43,6 +43,14 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.5, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",

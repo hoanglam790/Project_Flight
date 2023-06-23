@@ -18,13 +18,13 @@ namespace FlightDocs.Repository
             _dataContext = dataContext;
         }
 
-        public async Task<object> CreateUser(UserCreate user)
+        public async Task<bool> CreateUser(UserCreate user)
         {   
             CreatePasswordHashing(user.Password, out byte[] passHash, out byte[] passSalt);
             var createUser = new User();
 
             // r is used to save the result
-            var r = new UserResult();
+            //var r = new UserResult();
             createUser.Name = user.Name;
             createUser.Email = user.Email;
             createUser.PasswordHashing = passHash;
@@ -32,62 +32,59 @@ namespace FlightDocs.Repository
             createUser.Address = user.Address;
             createUser.Phone = user.Phone;
             createUser.RoleID = user.Role;
-            createUser.GroupID = user.Group;
+            createUser.GroupPermissionID = user.Group;
             createUser.VerifyToken = CreateNewToken();
-            r.Success = SaveData(createUser);
-            return r;
+            _dataContext.Add(createUser);
+            await _dataContext.SaveChangesAsync();
+            return true;
         }
 
-        public async Task<object> LoginUser(UserLogin user)
+        public async Task<bool> LoginUser(UserLogin user)
         {
-            var userResult = new UserLoginResult();
-            var userLogin = FindUser(user.Email);
-            if(userLogin == null)
+            //var userResult = new UserLoginResult();
+            //var userLogin = FindUser(user.Email);
+            //if(userLogin != user.Email)
+            //{
+            //    //userResult.Success = false;
+            //    //userResult.MessageResponse = "Invalid email.";
+            //    return false;
+            //}
+            //else
+            //{
+
+            //}
+            User account = new User();
+            var verifyUser = VerifyPasswordHashing(user.Password, account.PasswordHashing, account.PasswordSalt);
+            if (!verifyUser)
             {
-                userResult.Success = false;
-                userResult.MessageResponse = "Invalid email.";
-                return userResult;
+                //userResult.Success = false;
+                //userResult.MessageResponse = "Password is invalid. Please check again !!!";
+                return false;
             }
-            else
-            {
-                User account = new User();
-                var verifyUser = VerifyPasswordHashing(user.Password, account.PasswordHashing, account.PasswordSalt);
-                if(!verifyUser)
-                {
-                    userResult.Success = false;
-                    userResult.MessageResponse = "Password is invalid. Please check again !!!";
-                    return userResult;
-                }
-                if(account.VeryfiedAt == null)
-                {
-                    userResult.Success = false;
-                    userResult.MessageResponse = "Unauthenticated user.";
-                    return userResult;
-                }
-                else
-                {
-                    userResult.Success = true;
-                    userResult.MessageResponse = $"Login succesful. Your name: {account.Name}";
-                    return userResult;
-                }
-            }
+            //if(account.VeryfiedAt == null)
+            //{
+            //    //userResult.Success = false;
+            //    //userResult.MessageResponse = "Unauthenticated user.";
+            //    return false;
+            //}
+            return true;
         }
 
-        public async Task<object> VerifyUser(string token)
+        public async Task<bool> VerifyUser(string token)
         {
-            var userResult = new UserLoginResult();
+            //var userResult = new UserLoginResult();
             var verify = _dataContext.Users.FirstOrDefault(n => n.VerifyToken == token);
             if (verify == null)
             {
-                userResult.Success = false;
-                userResult.MessageResponse = "Invalid token";
-                return userResult;
+                //userResult.Success = false;
+                //userResult.MessageResponse = "Invalid token";
+                return false;
             }
             verify.VeryfiedAt = DateTime.Now;
-            _dataContext.SaveChanges();
-            userResult.Success = true;
-            userResult.MessageResponse = "User has been verified successful.";
-            return userResult;
+            await _dataContext.SaveChangesAsync();
+            //userResult.Success = true;
+            //userResult.MessageResponse = "User has been verified successful.";
+            return true;
         }
 
         private void CreatePasswordHashing(string passWord, out byte[] passHash, out byte[] passSalt)

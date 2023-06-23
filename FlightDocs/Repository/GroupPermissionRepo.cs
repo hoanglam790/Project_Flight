@@ -41,7 +41,7 @@ namespace FlightDocs.Repository
         
         public async Task<bool> UpdateGroupPermission(GroupPermissionRead permission, int id)
         {
-            var updateGroupPermission = await _dataContext.GroupPermissions.FirstOrDefaultAsync(f => f.GroupID == id);
+            var updateGroupPermission = await _dataContext.GroupPermissions.FirstOrDefaultAsync(f => f.GroupPermissionID == id);
             if (updateGroupPermission != null)
             {
                 updateGroupPermission.GroupName = permission.GroupName;
@@ -61,7 +61,7 @@ namespace FlightDocs.Repository
 
         public async Task<bool> DeleteGroupPermission(int id)
         {
-            var deleteGroupPermission = await _dataContext.GroupPermissions.FirstOrDefaultAsync(f => f.GroupID == id);
+            var deleteGroupPermission = await _dataContext.GroupPermissions.FirstOrDefaultAsync(f => f.GroupPermissionID == id);
             if (deleteGroupPermission != null)
             {
                 _dataContext.Remove(deleteGroupPermission);

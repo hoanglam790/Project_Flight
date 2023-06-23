@@ -4,8 +4,8 @@ namespace FlightDocs.Repository
 {
     public interface IUserRepo
     {
-        Task<object> CreateUser(UserCreate user);
-        Task<object> LoginUser(UserLogin user);
-        Task<object> VerifyUser(string token);
+        Task<bool> CreateUser(UserCreate user);
+        Task<bool> LoginUser(UserLogin user);
+        Task<bool> VerifyUser(string token);
     }
 }

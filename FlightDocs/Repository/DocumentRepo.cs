@@ -28,12 +28,31 @@ namespace FlightDocs.Repository
         public async Task<bool> CreateDocumentType(DocumentCreate documentCreate)
         {
             var addDocument = new Document();
-            addDocument.DocumentName = documentCreate.DocumentName;
-            addDocument.TypeID = documentCreate.DocumentTypeID;
+            //addDocument.DocumentName = documentCreate.DocumentName;
+            addDocument.DocumentTypeID = documentCreate.DocumentTypeID;
             addDocument.CreateDate = DateTime.Now;
             addDocument.Version = "1.0";
             addDocument.FlightID = documentCreate.FlightID;
             addDocument.UserID = documentCreate.UserID;
+
+            if(documentCreate.DocumentName.Length > 0)
+            {
+                var pathDocument = Path.Combine(Directory.GetCurrentDirectory(), "Upload", "Document", documentCreate.DocumentName.FileName);
+                if (!Directory.Exists(pathDocument))
+                {
+                    Directory.CreateDirectory(pathDocument);
+                }
+                using(var st = System.IO.File.Create(pathDocument))
+                {
+                    await documentCreate.DocumentName.CopyToAsync(st);
+                    st.Flush();
+                }
+                addDocument.DocumentName = documentCreate.DocumentName.FileName;
+            }
+            else
+            {
+                addDocument.DocumentName = "";
+            }
             _dataContext.Documents.Add(addDocument);
             await _dataContext.SaveChangesAsync();
             return true;
@@ -44,9 +63,22 @@ namespace FlightDocs.Repository
             var updateDocument = await _dataContext.Documents.FirstOrDefaultAsync(n => n.DocumentID == id);
             if (updateDocument != null)
             {
-                updateDocument.DocumentName = document.DocumentName;
-                updateDocument.TypeID = document.DocumentTypeID;
-                updateDocument.CreateDate = DateTime.Now;
+                var pathDocument = Path.Combine(Directory.GetCurrentDirectory(), "Upload", "Document", document.DocumentName.FileName);
+                if (Directory.Exists(pathDocument))
+                {
+                    return false;
+                }
+                else
+                {
+                    using (var st = System.IO.File.Create(pathDocument))
+                    {
+                        await document.DocumentName.CopyToAsync(st);
+                        st.Flush();
+                    }
+                    updateDocument.DocumentName = document.DocumentName.FileName;
+                }                
+                updateDocument.DocumentTypeID = document.DocumentTypeID;
+                updateDocument.UpdateDate = DateTime.Now;
                 updateDocument.Version = "1.1";
                 updateDocument.FlightID = document.FlightID;
                 updateDocument.UserID = document.UserID;
