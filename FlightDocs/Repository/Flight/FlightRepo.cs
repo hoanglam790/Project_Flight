@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FlightDocs.DTO;
-using FlightDocs.Results;
 
 namespace FlightDocs.Repository
 {

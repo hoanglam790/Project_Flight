@@ -76,10 +76,16 @@ namespace FlightDocs.Repository
                         st.Flush();
                     }
                     updateDocument.DocumentName = document.DocumentName.FileName;
-                }                
+                }
+
+                // Convert version from "string" to "float" to calculate
+                // For example: 1.0 + 0.1 = 1.1
+                float currentVersion = float.Parse(updateDocument.Version!);
+                var updateVersion = (currentVersion + 0.1).ToString("0.0");
+
                 updateDocument.DocumentTypeID = document.DocumentTypeID;
                 updateDocument.UpdateDate = DateTime.Now;
-                updateDocument.Version = "1.1";
+                updateDocument.Version = updateVersion;
                 updateDocument.FlightID = document.FlightID;
                 updateDocument.UserID = document.UserID;
                 _dataContext.Update(updateDocument);

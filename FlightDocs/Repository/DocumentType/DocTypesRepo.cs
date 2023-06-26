@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FlightDocs.DTO;
-using FlightDocs.Results;
 
 namespace FlightDocs.Repository
 {
@@ -39,34 +38,34 @@ namespace FlightDocs.Repository
 
         public async Task<bool> UpdateDocumentType(DocumentTypeRead documentTypeRead, int id)
         {
-            //var updateDocsType = await _dataContext.DocumentTypes.FirstOrDefaultAsync(n => n.TypeID == id);
-            //if (updateDocsType != null)
-            //{
-            //    updateDocsType.TyleName = documentTypeRead.DocumentTypeName;
-            //    updateDocsType.CreateDate = DateTime.Now;
-            //    _dataContext.Update(updateDocsType);
-            //    await _dataContext.SaveChangesAsync();
-            //    return true;
-            //}
-            //else
-            //{
+            var updateDocsType = await _dataContext.DocumentTypes.FirstOrDefaultAsync(n => n.DocumentTypeID == id);
+            if (updateDocsType != null)
+            {
+                updateDocsType.TyleName = documentTypeRead.DocumentTypeName;
+                updateDocsType.CreateDate = DateTime.Now;
+                _dataContext.Update(updateDocsType);
+                await _dataContext.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
                 return false;
-            //}
+            }
         }
 
         public async Task<bool> DeleteDocumentType(int id)
         {
-            //var deleteDocsType = await _dataContext.DocumentTypes.FirstOrDefaultAsync(n => n.TypeID == id);
-            //if (deleteDocsType != null)
-            //{
-            //    _dataContext.Remove(deleteDocsType);
-            //    await _dataContext.SaveChangesAsync();
-            //    return true;
-            //}
-            //else
-            //{
+            var deleteDocsType = await _dataContext.DocumentTypes.FirstOrDefaultAsync(n => n.DocumentTypeID == id);
+            if (deleteDocsType != null)
+            {
+                _dataContext.Remove(deleteDocsType);
+                await _dataContext.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
                 return false;
-            //}
+            }
         }
     }
 }
