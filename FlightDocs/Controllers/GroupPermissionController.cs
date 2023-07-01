@@ -7,6 +7,7 @@ namespace FlightDocs.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class GroupPermissionController : ControllerBase
     {
         private readonly IGroupPermissionRepo _groupPermissionRepo;
@@ -39,7 +40,6 @@ namespace FlightDocs.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateNewGroupPermission(GroupPermissionCreate groupPermission)
         {
             await _groupPermissionRepo.CreateGroupPermission(groupPermission);
